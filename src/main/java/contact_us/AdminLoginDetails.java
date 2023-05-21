@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name="getLoginDetails",urlPatterns="/AdminLoginDetails")
-public class AdminLoginDetails extends HttpServlet {
+public class AdminLoginDetails extends HttpServlet 
 	protected void service(HttpServletRequest request,HttpServletResponse response) {
 		doPost(request,response);
 	}
