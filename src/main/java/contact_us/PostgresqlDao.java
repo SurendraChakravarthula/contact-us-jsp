@@ -15,7 +15,7 @@ interface UserDao {
 	boolean archiveMessage(int id);
 	boolean restoreMessage(int id);
 	boolean deleteActiveMessage(int id);
-	boolean deleteArchiveMessage(int id);
+	boolean deleteArchivedMessage(int id);
 	
 
 }
@@ -258,8 +258,22 @@ public class PostgresqlDao implements UserDao{
 
 
 	@Override
-	public boolean deleteArchiveMessage(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteArchivedMessage(int id) {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		int delete=0;
+		
+		String deleteMessage="DELETE FROM archive WHERE id=?; ";
+		try {	
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,username,password);
+			statement = connection.prepareStatement(deleteMessage);
+			
+			statement.setInt(1, id);
+			delete = statement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return delete>0;
 	}
 }

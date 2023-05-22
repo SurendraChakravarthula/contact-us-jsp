@@ -69,7 +69,7 @@
                         <td>${message.email}</td>
                         <td>${message.message}</td>
                         <td><a href="restoreFromActive?id=${message.id}">Restore</a></td>
-                        <td><a href="deleteActiveMessage?id=${message.id}">Delete</a></td>
+                        <td><a href="deleteArchivedMessage?id=${message.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
