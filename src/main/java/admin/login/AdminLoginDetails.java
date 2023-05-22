@@ -1,4 +1,4 @@
-package contact_us;
+package admin.login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import admin.contactus.requests.PostgresqlDao;
+import contact_us.ContactUsPOJO;
 
 @WebServlet(name="getLoginDetails",urlPatterns="/AdminLoginDetails")
 public class AdminLoginDetails extends HttpServlet {

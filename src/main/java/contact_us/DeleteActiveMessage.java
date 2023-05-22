@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.contactus.requests.PostgresqlDao;
+
 @WebServlet(name="deleteActiveMessage",urlPatterns="/deleteActiveMessage")
 public class DeleteActiveMessage extends HttpServlet {
 

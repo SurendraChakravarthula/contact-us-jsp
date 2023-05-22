@@ -1,4 +1,4 @@
-package contact_us;
+package admin.contactus.requests;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import contact_us.ContactUsPOJO;
 
 @WebServlet(name="archiveMessage",urlPatterns="/archiveFromActive")
 public class ArchiveMessageFromActive extends HttpServlet {
