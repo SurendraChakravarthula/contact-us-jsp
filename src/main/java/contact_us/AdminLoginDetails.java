@@ -37,7 +37,7 @@ public class AdminLoginDetails extends HttpServlet {
 			   List<ContactUsPOJO> archiveMessages=adminLogin.getArchiveMessages();
 			   session.setAttribute("archiveMessages", archiveMessages);
 			   
-			   response.sendRedirect("ContactUsMessages.jsp");
+			   response.sendRedirect("ActiveMessages.jsp");
 		   }else {
 			   response.sendRedirect("LoginPage.jsp");
 		   }

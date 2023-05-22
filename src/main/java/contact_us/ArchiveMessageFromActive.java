@@ -31,7 +31,7 @@ public class ArchiveMessageFromActive extends HttpServlet {
 			 List<ContactUsPOJO> archiveMessages=adminLogin.getArchiveMessages();
 			 session.setAttribute("archiveMessages", archiveMessages);
 			   
-			 response.sendRedirect("ContactUsMessages.jsp");
+			 response.sendRedirect("ActiveMessages.jsp");
 		 }else {
 			 response.getWriter().println("<html><body><h1>Something Wrong! Please try Again</h1></body></html>");
 		 }

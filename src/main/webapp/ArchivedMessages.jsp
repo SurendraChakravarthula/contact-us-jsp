@@ -22,35 +22,13 @@
             <h1 class="header-heading">
                 Welcome <%= username %>!
             </h1>
-            <form action="Logout">
-            <button class="button">Logout</button>
-            </form>
+            <div class="button">
+            <a href="ActiveMessages.jsp">Messages</a>
+            <a href="Logout">Logout</a>
+            </div>
         </div>
     </header>
     <main id="main">
-        <table class="customer-table">
-            <caption>
-                <h1>Active Messages</h1>
-            </caption>
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Message</th>
-                    <th>Archive</th>
-                    <th>Delete</th>
-                </tr>
-                 <c:forEach var="message" items="${activeMessages}">
-                    <tr class="display-row" >
-                        <td>${message.name}</td>
-                        <td>${message.email}</td>
-                        <td>${message.message}</td>
-                        <td><a href="archiveFromActive?id=${message.id}">Archive</a></td>
-                        <td><a href="deleteActiveMessage?id=${message.id}">Delete</a></td>
-                    </tr>
-                </c:forEach> 
-            </tbody>
-        </table>
         <table class="archive-table">
             <caption>
                 <h1>Archived Messages</h1>
@@ -60,7 +38,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Message</th>
-                    <th>Restore</th>
+                    <th>Unarchive</th>
                     <th>Delete</th>
                 </tr>
                 <c:forEach var="message" items="${archiveMessages}">
@@ -68,7 +46,7 @@
                         <td>${message.name}</td>
                         <td>${message.email}</td>
                         <td>${message.message}</td>
-                        <td><a href="restoreFromActive?id=${message.id}">Restore</a></td>
+                        <td><a href="restoreFromActive?id=${message.id}">Unarchive</a></td>
                         <td><a href="deleteArchivedMessage?id=${message.id}">Delete</a></td>
                     </tr>
                 </c:forEach>

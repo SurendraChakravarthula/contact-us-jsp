@@ -16,9 +16,8 @@ interface UserDao {
 	boolean restoreMessage(int id);
 	boolean deleteActiveMessage(int id);
 	boolean deleteArchivedMessage(int id);
-	
-
 }
+
 public class PostgresqlDao implements UserDao{
 	
 	  private String url="jdbc:postgresql://localhost:5432/user_info";
@@ -161,7 +160,6 @@ public class PostgresqlDao implements UserDao{
 		int update=0;
 		
 		String getMessage ="SELECT * FROM contact_us WHERE id=?";
-		String deleteMessage=" DELETE FROM contact_us WHERE id=?; ";
 		String addArchive="INSERT INTO archive(name,email,message) values(?,?,?)";
 		
 		try {
@@ -176,11 +174,9 @@ public class PostgresqlDao implements UserDao{
 			String name=resultSet.getString("name");
 			String email=resultSet.getString("email");
 			String message=resultSet.getString("message");
-			 
-			statement = connection.prepareStatement(deleteMessage);
-			statement.setInt(1, id);
 			
-			int delete = statement.executeUpdate();
+			deleteActiveMessage(id);
+			
 			statement = connection.prepareStatement(addArchive);
 			statement.setString(1, name);
 			statement.setString(2, email);
@@ -203,7 +199,6 @@ public class PostgresqlDao implements UserDao{
 		int update=0;
 		
 		String getMessage ="SELECT * FROM archive WHERE id=?";
-		String deleteMessage=" DELETE FROM archive WHERE id=?; ";
 		String addArchive="INSERT INTO contact_us(name,email,message) values(?,?,?)";
 		
 		try {
@@ -219,10 +214,8 @@ public class PostgresqlDao implements UserDao{
 			String email=resultSet.getString("email");
 			String message=resultSet.getString("message");
 			 
-			statement = connection.prepareStatement(deleteMessage);
-			statement.setInt(1, id);
+			deleteArchivedMessage(id);
 			
-			int delete = statement.executeUpdate();
 			statement = connection.prepareStatement(addArchive);
 			statement.setString(1, name);
 			statement.setString(2, email);
