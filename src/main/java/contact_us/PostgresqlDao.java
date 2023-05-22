@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 interface UserDao {
 	boolean addContactUsMessages(String name,String email,String message);
 	boolean getAdminLogin(String username,String Password);
+	List<ContactUsPOJO> getActiveMessages();
+	List<ContactUsPOJO> getArchiveMessages();
 
 }
 public class PostgresqlDao implements UserDao{
@@ -74,4 +78,73 @@ public class PostgresqlDao implements UserDao{
 		
 		return result;
 	}
+
+
+	@Override
+	public List<ContactUsPOJO> getActiveMessages() {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		List<ContactUsPOJO> activeMessagesData=new ArrayList<>();
+			
+		String activeMessages="SELECT * FROM contact_us";
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,username,password);   
+			statement = connection.prepareStatement(activeMessages);
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				 int id=resultSet.getInt("id");
+				 String name=resultSet.getString("name");
+				 String email=resultSet.getString("email");
+				 String message=resultSet.getString("message");
+				 
+				 ContactUsPOJO contactUsPOJO=new ContactUsPOJO(id,name,email,message);
+				 activeMessagesData.add(contactUsPOJO);
+			}
+			
+			connection.close();
+			statement.close();
+			resultSet.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+			return activeMessagesData;
+	}
+	
+	public List<ContactUsPOJO> getArchiveMessages() {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		List<ContactUsPOJO> archiveMessagesData=new ArrayList<>();
+			
+		String archiveMessages="SELECT * FROM archive";
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,username,password);   
+			statement = connection.prepareStatement(archiveMessages);
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				 String name=resultSet.getString("name");
+				 String email=resultSet.getString("email");
+				 String message=resultSet.getString("message");
+				 
+				 ContactUsPOJO contactUsPOJO=new ContactUsPOJO(name,email,message);
+				 archiveMessagesData.add(contactUsPOJO);
+			}
+			
+			connection.close();
+			statement.close();
+			resultSet.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
+			return archiveMessagesData;
+	}
+	
+	
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name="getLoginDetails",urlPatterns="/AdminLoginDetails")
-public class AdminLoginDetails extends HttpServlet 
+public class AdminLoginDetails extends HttpServlet {
 	protected void service(HttpServletRequest request,HttpServletResponse response) {
 		doPost(request,response);
 	}
@@ -29,9 +30,16 @@ public class AdminLoginDetails extends HttpServlet
 		   if(checkAdmin) {
 			   HttpSession session=request.getSession();
 			   session.setAttribute("username",adminUsername);
+	
+			   List<ContactUsPOJO> activeMessages=adminLogin.getActiveMessages();
+			   session.setAttribute("activeMessages", activeMessages);
+			   
+			   List<ContactUsPOJO> archiveMessages=adminLogin.getArchiveMessages();
+			   session.setAttribute("archiveMessages", archiveMessages);
+			   
 			   response.sendRedirect("ContactUsMessages.jsp");
 		   }else {
-			   response.sendRedirect("AdminLogin.jsp");
+			   response.sendRedirect("LoginPage.jsp");
 		   }
 		   }catch(Exception e){
 			   e.printStackTrace();
