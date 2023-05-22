@@ -2,10 +2,10 @@ package contact_us;
 
 public class ContactUsPOJO {
 	private int id;
-    private String name;
-    private String email;
-    private String message;
-    
+	private String name;
+	private String email;
+	private String message;
+
 	public ContactUsPOJO(int id, String name, String email, String message) {
 		this.id = id;
 		this.name = name;
@@ -22,7 +22,7 @@ public class ContactUsPOJO {
 	public int getId() {
 		return id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name="logout",urlPatterns="/Logout")
+@WebServlet(name = "logout", urlPatterns = "/Logout")
 public class LogOut extends HttpServlet {
-   protected void service(HttpServletRequest request,HttpServletResponse response) {
-	   doPost(request,response);
-   }
-   
-   protected void doPost(HttpServletRequest request,HttpServletResponse response) {
-	   HttpSession session=request.getSession(false);
-	   session.setAttribute("username", null);
-	   session.invalidate();
-	   try {
-		response.sendRedirect("LoginPage.jsp");
-	} catch (IOException e) {
-		e.printStackTrace();
+	protected void service(HttpServletRequest request, HttpServletResponse response) {
+		doPost(request, response);
 	}
-   }
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		session.setAttribute("username", null);
+		session.invalidate();
+		try {
+			response.sendRedirect("LoginPage.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
