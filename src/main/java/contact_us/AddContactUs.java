@@ -18,7 +18,7 @@ public class AddContactUs extends HttpServlet{
 
 			   String name=request.getParameter("name");
 			   String email=request.getParameter("email");
-			   String message=request.getParameter("message");
+			   String message=request.getParameter("message").trim();
 			   
 			   PostgresqlDao contactUsDao=new PostgresqlDao();
 			   boolean addedToContactUs=contactUsDao.addContactUsMessages(name,email,message);

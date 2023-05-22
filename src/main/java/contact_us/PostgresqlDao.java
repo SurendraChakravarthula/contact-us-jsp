@@ -12,6 +12,11 @@ interface UserDao {
 	boolean getAdminLogin(String username,String Password);
 	List<ContactUsPOJO> getActiveMessages();
 	List<ContactUsPOJO> getArchiveMessages();
+	boolean archiveMessage(int id);
+	boolean restoreMessage(int id);
+	boolean deleteActiveMessage(int id);
+	boolean deleteArchiveMessage(int id);
+	
 
 }
 public class PostgresqlDao implements UserDao{
@@ -129,11 +134,12 @@ public class PostgresqlDao implements UserDao{
 			resultSet = statement.executeQuery();
 			
 			while(resultSet.next()) {
+				int id=resultSet.getInt("id");
 				 String name=resultSet.getString("name");
 				 String email=resultSet.getString("email");
 				 String message=resultSet.getString("message");
 				 
-				 ContactUsPOJO contactUsPOJO=new ContactUsPOJO(name,email,message);
+				 ContactUsPOJO contactUsPOJO=new ContactUsPOJO(id,name,email,message);
 				 archiveMessagesData.add(contactUsPOJO);
 			}
 			
@@ -145,6 +151,115 @@ public class PostgresqlDao implements UserDao{
 		}	
 			return archiveMessagesData;
 	}
-	
-	
+
+
+	@Override
+	public boolean archiveMessage(int id) {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		int update=0;
+		
+		String getMessage ="SELECT * FROM contact_us WHERE id=?";
+		String deleteMessage=" DELETE FROM contact_us WHERE id=?; ";
+		String addArchive="INSERT INTO archive(name,email,message) values(?,?,?)";
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,username,password);   
+			statement = connection.prepareStatement(getMessage);
+			statement.setInt(1, id);
+			
+			resultSet = statement.executeQuery();
+			
+            resultSet.next();
+			String name=resultSet.getString("name");
+			String email=resultSet.getString("email");
+			String message=resultSet.getString("message");
+			 
+			statement = connection.prepareStatement(deleteMessage);
+			statement.setInt(1, id);
+			
+			int delete = statement.executeUpdate();
+			statement = connection.prepareStatement(addArchive);
+			statement.setString(1, name);
+			statement.setString(2, email);
+			statement.setString(3, message);
+			
+			update = statement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return update>0;
+	}
+
+
+	@Override
+	public boolean restoreMessage(int id) {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		int update=0;
+		
+		String getMessage ="SELECT * FROM archive WHERE id=?";
+		String deleteMessage=" DELETE FROM archive WHERE id=?; ";
+		String addArchive="INSERT INTO contact_us(name,email,message) values(?,?,?)";
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,username,password);   
+			statement = connection.prepareStatement(getMessage);
+			statement.setInt(1, id);
+			
+			resultSet = statement.executeQuery();
+			
+            resultSet.next();
+			String name=resultSet.getString("name");
+			String email=resultSet.getString("email");
+			String message=resultSet.getString("message");
+			 
+			statement = connection.prepareStatement(deleteMessage);
+			statement.setInt(1, id);
+			
+			int delete = statement.executeUpdate();
+			statement = connection.prepareStatement(addArchive);
+			statement.setString(1, name);
+			statement.setString(2, email);
+			statement.setString(3, message);
+			
+			update = statement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return update>0;
+	}
+
+
+	@Override
+	public boolean deleteActiveMessage(int id) {
+		Connection connection=null;
+		PreparedStatement statement=null;
+		int delete=0;
+		
+		String deleteMessage="DELETE FROM contact_us WHERE id=?; ";
+		try {	
+			Class.forName("org.postgresql.Driver");
+			connection = DriverManager.getConnection(url,username,password);
+			statement = connection.prepareStatement(deleteMessage);
+			
+			statement.setInt(1, id);
+			delete = statement.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return delete>0;
+	}
+
+
+	@Override
+	public boolean deleteArchiveMessage(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

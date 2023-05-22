@@ -38,15 +38,15 @@
                     <th>Email</th>
                     <th>Message</th>
                     <th>Archive</th>
-                    <th>Reply</th>
+                    <th>Delete</th>
                 </tr>
                  <c:forEach var="message" items="${activeMessages}">
                     <tr class="display-row" >
                         <td>${message.name}</td>
                         <td>${message.email}</td>
                         <td>${message.message}</td>
-                        <td><a href="Archive?id=${message.id}">Archive</a></td>
-                        <td><a href="Reply?id=${message.id}">Reply</a></td>
+                        <td><a href="archiveFromActive?id=${message.id}">Archive</a></td>
+                        <td><a href="deleteActiveMessage?id=${message.id}">Delete</a></td>
                     </tr>
                 </c:forEach> 
             </tbody>
@@ -68,8 +68,8 @@
                         <td>${message.name}</td>
                         <td>${message.email}</td>
                         <td>${message.message}</td>
-                        <td><a href="Restore?id=${message.id}">Restore</a></td>
-                        <td><a href="Delete?id=${message.id}">Delete</a></td>
+                        <td><a href="restoreFromActive?id=${message.id}">Restore</a></td>
+                        <td><a href="deleteActiveMessage?id=${message.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
