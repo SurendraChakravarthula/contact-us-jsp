@@ -11,7 +11,7 @@
 	<main id="body-container">
 		<img src="./Images/developer.jpg" alt="">
 
-		<form action="saveData" method="post" id="form">
+		<form action="contactus" method="post" id="form">
 			<h1 class="heading">Contact Us</h1>
 			<label for="full_name">
 				<h2>
