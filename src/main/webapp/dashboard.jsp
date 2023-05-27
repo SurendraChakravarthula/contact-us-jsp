@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Messages</title>
-<link rel="stylesheet" href="dashboard_style.css">
+<link rel="stylesheet" href="dashboard.css">
 <body>
 	<%
 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -47,8 +47,7 @@
 						<td td class="table-content">${request.getTimestamp()}</td>
 						<td td class="table-content">
 							<form action="dashboard" method="post" class="link">
-								<button type="submit" name="id"
-									value="${request.id}">Archive</button>
+								<button type="submit" name="id" value="${request.id}">Archive</button>
 							</form>
 						</td>
 					</tr>
@@ -77,8 +76,7 @@
 						<td class="table-content">${request.getTimestamp()}</td>
 						<td class="table-content">
 							<form action="dashboard" method="post" class="link">
-								<button type="submit" name="id"
-									value="${request.id}">Unarchive</button>
+								<button type="submit" name="id" value="${request.id}">Unarchive</button>
 							</form>
 						</td>
 					</tr>

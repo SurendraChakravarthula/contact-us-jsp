@@ -1,11 +1,11 @@
-
 * {
 	border: none;
 	outline: none;
 	margin: 0;
 	padding: 0;
 	color: rgb(252, 252, 252);
-	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+		sans-serif
 }
 
 body {
@@ -56,8 +56,8 @@ table .table-header, .table-content {
 
 button {
 	background-color: inherit;
- 	border: none; 
-	cursor: pointer; 
+	border: none;
+	cursor: pointer;
 	color: rgb(255, 255, 255);
 	font-size: 1rem;
 }

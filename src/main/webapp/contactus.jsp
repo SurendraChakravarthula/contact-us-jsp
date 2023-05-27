@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Contact Us</title>
-<link rel="stylesheet" href="contactus_style.css">
+<link rel="stylesheet" href="contactus.css">
 </head>
 <body>
 	<main id="body-container">

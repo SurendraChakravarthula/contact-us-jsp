@@ -1,4 +1,4 @@
-package contact_us;
+package servlets;
 
 import java.io.IOException;
 
@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.RequestDao;
+import model.Request;
+
 @WebServlet(name = "ContactUs", urlPatterns = "/contactus")
 public class ContactUsServlet extends HttpServlet {
-
 	protected void doGet(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		RequestDispatcher requestDispatcher = httpRequest.getRequestDispatcher("contactus.jsp");
 
@@ -23,15 +25,17 @@ public class ContactUsServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-
 		String name = httpRequest.getParameter("name");
 		String email = httpRequest.getParameter("email");
 		String message = httpRequest.getParameter("message").trim();
 
-		Request request = new Request(name, email, message);
-		RequestDao requestDao = new ContactUsRequestDao();
-
+		Request request = new Request();
+		request.setName(name);
+		request.setEmail(email);
+		request.setMessage(message);
+		RequestDao requestDao = new RequestDao();
 		boolean saveRequest = requestDao.saveRequest(request);
+		
 		try {
 			if (saveRequest) {
 				httpResponse.getWriter().println(

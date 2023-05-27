@@ -1,4 +1,4 @@
-package admin.login;
+package servlets;
 
 import java.io.IOException;
 
@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.UserDao;
+import model.User;
 
 @WebServlet(name = "adminLogin", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -23,21 +26,22 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-
 		String adminUsername = httpRequest.getParameter("username");
 		String adminPassword = httpRequest.getParameter("password");
 
-		UserDao userDao = new UserRequestDao();
-		boolean checkAdmin = userDao.isValidUser(adminUsername, adminPassword);
+		User user = new User();
+		user.setUsername(adminUsername);
+		user.setPassword(adminPassword);
+		
+		UserDao userDao = new UserDao();
+		boolean checkAdmin = userDao.isValidUser(user);
 
 		try {
 			if (checkAdmin) {
 				HttpSession session = httpRequest.getSession(true);
 				session.setAttribute("username", adminUsername);
-
 				httpResponse.sendRedirect("dashboard");
 			} else {
-
 				httpRequest.setAttribute("error", "Invalid Username or Password");
 				RequestDispatcher requestDispatcher = httpRequest.getRequestDispatcher("/login.jsp");
 				requestDispatcher.include(httpRequest, httpResponse);

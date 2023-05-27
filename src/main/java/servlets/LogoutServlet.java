@@ -1,4 +1,4 @@
-package admin.dashboard;
+package servlets;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "logout", urlPatterns = "/logout")
-public class Logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		HttpSession session = httpRequest.getSession(false);
 

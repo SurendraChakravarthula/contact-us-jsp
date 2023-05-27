@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Login Page</title>
-<link rel="stylesheet" href="login_style.css">
+<link rel="stylesheet" href="login.css">
 </head>
 <body>
 	<c:if test="${not empty requestScope.error}">
