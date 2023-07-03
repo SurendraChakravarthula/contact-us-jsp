@@ -28,11 +28,9 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		String adminUsername = httpRequest.getParameter("username");
 		String adminPassword = httpRequest.getParameter("password");
-
 		User user = new User();
 		user.setUsername(adminUsername);
-		user.setPassword(adminPassword);
-		
+		user.setPassword(adminPassword);		
 		UserDao userDao = new UserDao();
 		boolean checkAdmin = userDao.isValidUser(user);
 

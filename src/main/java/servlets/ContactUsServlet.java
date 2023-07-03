@@ -28,7 +28,6 @@ public class ContactUsServlet extends HttpServlet {
 		String name = httpRequest.getParameter("name");
 		String email = httpRequest.getParameter("email");
 		String message = httpRequest.getParameter("message").trim();
-
 		Request request = new Request();
 		request.setName(name);
 		request.setEmail(email);

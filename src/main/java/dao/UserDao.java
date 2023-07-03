@@ -19,7 +19,6 @@ public class UserDao {
 		try {
 			connection = Database.getConnection();
 			preparedStatement = connection.prepareStatement(fetchAdmin);
-
 			String adminUsername = user.getUsername();
 			String adminPassword = user.getPassword();			
 			preparedStatement.setString(1, adminUsername);

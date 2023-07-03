@@ -20,17 +20,14 @@ public class RequestDao {
 		try {
 			connection = Database.getConnection();
 			preparedStatement = connection.prepareStatement(contactUsSaveRequest);
-
 			String name = request.getName();
 			String email = request.getEmail();
 			String message = request.getMessage();
-
+			
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, email);
 			preparedStatement.setString(3, message);
-
 			update = preparedStatement.executeUpdate();
-
 			preparedStatement.close();
 			connection.close();
 		} catch (Exception e) {
@@ -54,7 +51,6 @@ public class RequestDao {
 			} else {
 				preparedStatement.setInt(1, 0);
 			}
-
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -69,8 +65,7 @@ public class RequestDao {
 				request.setName(name);
 				request.setEmail(email);
 				request.setMessage(message);
-				request.setTimestamp(timestamp);
-				
+				request.setTimestamp(timestamp);			
 				allRequests.add(request);
 			}
 			resultSet.close();
@@ -91,7 +86,6 @@ public class RequestDao {
 			connection = Database.getConnection();
 			preparedStatement = connection.prepareStatement(updateStatus);
 			preparedStatement.setInt(1, id);
-
 			update = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			connection.close();
